@@ -1,5 +1,5 @@
 local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-function MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd(data) m=string.sub(data, 0, 55) data=data:gsub(m,'')
+function SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW(data) m=string.sub(data, 0, 55) data=data:gsub(m,'')
 
 data = string.gsub(data, '[^'..b..'=]', '') return (data:gsub('.', function(x) if (x == '=') then return '' end local r,f='',(b:find(x)-1) for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end return r; end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x) if (#x ~= 8) then return '' end local c=0 for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end return string.char(c) end)) end
 
@@ -7,142 +7,556 @@ data = string.gsub(data, '[^'..b..'=]', '') return (data:gsub('.', function(x) i
  
 
 
-local ReplicatedStorage = game:GetService(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('PPebmqKtbuyhaHhhcTQonPBWVBxdIjlbfPFJkBXeOzIROKwVYvLwirbUmVwbGljYXRlZFN0b3JhZ2U='))
-local Players = game:GetService(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('WwnFsyGowFNTIuaWcLWWiePrbEGfhSOaxbpIORlpigEwLmBGpaZyeTRUGxheWVycw=='))
+-- Next-Gen Anti-Gift Roblox Script - Full 500+ lines version
+-- Features: Advanced GUI, dynamic remote blocking, inventory safeguards, tamper protection, logging, animations, and analytics
+
+-- Services
+local ReplicatedStorage = game:GetService(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('NGWGGLXRthMJXqTexFxXdBXfIIudeimHqmcvnNnWCCFFWblflrKBvpRUmVwbGljYXRlZFN0b3JhZ2U='))
+local Players = game:GetService(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('RimUJSdhZINUWYRpDPVthOAiqQGhIPNqufnPrSFQYntnuQYWYaxEDFQUGxheWVycw=='))
+local RunService = game:GetService(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ZmnkMpVjSkPaPxgHNhkAoyVGmtBIxaraiQoCeYzqsSyxcwqVUixOykQUnVuU2VydmljZQ=='))
+local TweenService = game:GetService(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('xPqdmoesQVylQeFDGCQBWPLoIqxnwpwKammxzmswZgdCfDAFbwAxGuFVHdlZW5TZXJ2aWNl'))
+local UserInputService = game:GetService(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('haWFMdGwoQzXRSorubtyfmazzzZoeNVntGxkYDwqZRtjNrkyvTXKRFKVXNlcklucHV0U2VydmljZQ=='))
+local SoundService = game:GetService(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('PcIPQaClBBrVNjGdesCGGVriZqZzifNDVbtRpBYRgoVXvLETKShOIVwU291bmRTZXJ2aWNl'))
 local LocalPlayer = Players.LocalPlayer
 
-local ScreenGui = Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('cOyqtBrlWnbVNKDpjPjFsZXivxbjKKOUuwfMhcyIhWbAfBNJkdOOdVEU2NyZWVuR3Vp'))
-ScreenGui.Name = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('YVWhZWleobxhswyOTulNcEnvSwIYcpzFUVyzRPDcPrksqwIuKzRarwpQW50aVNjYW1VSQ==')
-ScreenGui.Parent = LocalPlayer:WaitForChild(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('KcTAPHOVjyZuMSWpVUvuJwwOxFoubCQZoEzAUGITRkTgLyFDDhMDAphUGxheWVyR3Vp'))
+-- Module Table
+local AntiGift = {}
+AntiGift.GUI = {}
+AntiGift.BlockedRemotes = {}
+AntiGift.InventoryLocked = false
+AntiGift.Logs = {}
+AntiGift.Status = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('XpMiVLwzEsrJElHdVcXZjxqzzEczLwIptYfXyocOqyUPPnStdkHgHNhc2FmZQ==')
+AntiGift.Analytics = {
+	RemotesBlocked = 0,
+	TriggersAvoided = 0,
+	SessionStartTime = tick()
+}
 
-local StatusDot = Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('sKQadZIRwTOCJtPbnJRhILJfbkPreTJbyULODhSQScuSzTaSvJTsEPfRnJhbWU='))
-StatusDot.Size = UDim2.new(0, 12, 0, 12)
-StatusDot.Position = UDim2.new(0, 6, 0, 6)
-StatusDot.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
-StatusDot.BorderSizePixel = 0
-StatusDot.Parent = ScreenGui
-Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('wsiuCGtDjaLqxXltDzFdUCuMkrYBxpwnURLhPHwZmlldDfpfPRiqEPsVUlDb3JuZXI='), StatusDot).CornerRadius = UDim.new(1,0)
+-- ======= CONFIGURATION ======= --
+AntiGift.Config = {
+	AutoKickOnTrigger = false, -- Automatically kick the player if a gift remote is triggered?
+	KickMessage = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('VOrctKJLZVIGRWtTlLzDuUkxkCiVYzrxMtgebOMncgCZNohAAzAiBBN8J+aqCBBbnRpLVNjYW06IE1hbGljaW91cyBnaWZ0IHJlbW90ZSB0cmlnZ2VyZWQuIENsaWVudCBzZWN1cmVkLg=='),
+	ShowCustomAlertOnTrigger = true, -- Show a non-intrusive alert GUI instead of kicking?
+	AutoLockInventory = true, -- Continuously lock backpack items?
+	EnableHoverTooltips = true, -- Show detailed tooltips on hover for status and logs?
+	EnableSoundEffects = true, -- Play sounds for UI interactions and alerts?
+	WhitelistedRemotes = { -- Remotes with SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('qOgXwEXhozHJHItTYDBMJwgrpfDnkWEUeodEuGSotjPMtmauInwcYddZ2lmdA==') in the name to ignore (use with caution).
+		SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('AFDdNbRTKAxUsNBNHGlIZQCGaByPBrBoAfXyoSNklkfFeHWrHeqQohsU2FmZUdpZnRCb3hFdmVudA==')
+	}
+}
 
-local StatusLabel = Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('wiBdtVSZReavgzsmhsVlqanuqEKXOQsaSjqcTPBeSCeNGbKUMkJWJrFVGV4dExhYmVs'))
-StatusLabel.Size = UDim2.new(0, 100, 0, 18)
-StatusLabel.Position = UDim2.new(0, 22, 0, 4)
-StatusLabel.BackgroundTransparency = 1
-StatusLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('zcpGChYZjWDNEMZhefthQYldfkzgoKmiremVkjPDkwLjrzUzlJFMiDkU0FGRQ==')
-StatusLabel.TextColor3 = Color3.fromRGB(255,255,255)
-StatusLabel.Font = Enum.Font.GothamBold
-StatusLabel.TextScaled = true
-StatusLabel.TextWrapped = true
-StatusLabel.Parent = ScreenGui
+-- ======= GUI SETUP ======= --
+local GUI = AntiGift.GUI
+GUI.ScreenGui = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ogOrptClDhFLUFILFQtBVaHlloUoZMFUMNunXvOzLwOdwmdIbySSRJlU2NyZWVuR3Vp'))
+GUI.ScreenGui.Name = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ukDljjFLHWlmRgjtmCqhyCkBvANeiInEDRcVQBYmjiWNQyUJbRXPUplTmV4dEdlbkFudGlHaWZ0VUk=')
+GUI.ScreenGui.Parent = LocalPlayer:WaitForChild(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('DjMJLrECsbgMiMRnFGbAbdLqTUlIbKOTzzskwIOeMreuKjgkspwgoEEUGxheWVyR3Vp'))
+GUI.ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
-local function setStatus(mode)
-    if mode == MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('oskNijWELDjhXPNAWxfHfvgAYOwVATdnBDkUJDacoyYnmpbiOLbYmmpc2FmZQ==') then
-        StatusDot.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
-        StatusLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('upleDLNwoEdleSLgKFERpmkWRnwJletPuUzRAQeQsxWnQLOEQWxaoYWU0FGRQ==')
-    elseif mode == MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('AGBrIZlRZxNtHlMKWXGqTzXuTZRspUJkymgVNsOhsWrEFLkSvOCsWbad2Fybg==') then
-        StatusDot.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
-        StatusLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('OoTcxQyMgJTkQlUNHxbEyMeYchwVyeBZcyQpCgnhyNgeIOrBfEkPArOVlVMTkVSQUJMRQ==')
-    elseif mode == MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('liIIPyoiHccYJZDIsxJWjObzNkQHwsbhrRNYZXcCJGEYpBVkndLmVoTZGFuZ2Vy') then
-        StatusDot.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
-        StatusLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('HxhGTodEPxPcYnEqNwMGlNbHpSXSBQCZnCoYwKzvnEUrhelLzWAlCLVRkFJTEVE')
-    elseif mode == MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('siVBaZqhERWsUGxpMPkrzzoKPsGVvGjqnMlDgRURSjDbyFFuphPPlSPYnlwYXNz') then
-        StatusDot.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        StatusLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('frxTgEwbloIojNRatRbyaaOUDAdXzjCueVGaSFsasyXFUbztcbmSXKmVFJJR0dFUkVE')
-    end
+-- Status Dot
+GUI.StatusDot = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('NSwuzKrkTZSkJzXIVXLYZyXPDOjNkElArMFIOUxgUfSfRSTQDBPONiJRnJhbWU='))
+GUI.StatusDot.Size = UDim2.new(0, 22, 0, 22)
+GUI.StatusDot.Position = UDim2.new(0.5, -11, 0, 12)
+GUI.StatusDot.BackgroundColor3 = Color3.fromRGB(0,200,0)
+GUI.StatusDot.BorderSizePixel = 0
+GUI.StatusDot.ZIndex = 2
+GUI.StatusDot.Parent = GUI.ScreenGui
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ezwZLTadzTKQIUUOrxKrJfRKQvtHesQKsJfZeeAuIhACXowJVKJUxsTVUlDb3JuZXI='), GUI.StatusDot).CornerRadius = UDim.new(1,0)
+
+-- Status Label
+GUI.StatusLabel = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('AWKeRWalkzZmqumNfUISNNsvsopbXWjVxvdbjUjPpYLgAKTVpBQZXTkVGV4dExhYmVs'))
+GUI.StatusLabel.Size = UDim2.new(0, 220, 0, 26)
+GUI.StatusLabel.Position = UDim2.new(0.5, -110, 0, 38)
+GUI.StatusLabel.BackgroundTransparency = 1
+GUI.StatusLabel.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('bilhExWdFjtWBpNsJlBRVNVnHrJhFOflVayCcrvyAECJpXuJXSbdQPcU0FGRQ==')
+GUI.StatusLabel.TextColor3 = Color3.fromRGB(255,255,255)
+GUI.StatusLabel.Font = Enum.Font.GothamBold
+GUI.StatusLabel.TextScaled = true
+GUI.StatusLabel.TextWrapped = true
+GUI.StatusLabel.ZIndex = 2
+GUI.StatusLabel.Parent = GUI.ScreenGui
+
+-- Loading Frame
+GUI.LoaderFrame = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('rlMqnvvDxRQELTmKFnFjTLtluvrIBBiGjsQNJQCOCcnJFBxywCFRLqzRnJhbWU='))
+GUI.LoaderFrame.Size = UDim2.new(0.5,0,0.25,0)
+GUI.LoaderFrame.Position = UDim2.new(0.25,0,0.38,0)
+GUI.LoaderFrame.BackgroundColor3 = Color3.fromRGB(30,30,30)
+GUI.LoaderFrame.BorderSizePixel = 0
+GUI.LoaderFrame.ZIndex = 50
+GUI.LoaderFrame.ClipsDescendants = true
+GUI.LoaderFrame.Active = true
+GUI.LoaderFrame.Parent = GUI.ScreenGui
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('meDYYepmiVmPYzBGZgACYvhZCtvjHktKcPhtpmztkjFUpCOXEDbgDSRVUlDb3JuZXI='), GUI.LoaderFrame).CornerRadius = UDim.new(0,14)
+
+-- Loading Title
+GUI.TitleLabel = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ATkBGMmNiLnmCmyfeqDKHonfIanTuOAOFCOtkIwggLRydeKfTCOPNZaVGV4dExhYmVs'))
+GUI.TitleLabel.Size = UDim2.new(1,0,0.3,0)
+GUI.TitleLabel.Position = UDim2.new(0,0,0,0)
+GUI.TitleLabel.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('uSqjhWxAjKlxiPUhOFQuzryWtsWdiskSQiTsKizKpeYHrLsOFIUbyDu8J+boe+4jyBBbnRpLUdpZnQgU2Nhbg==')
+GUI.TitleLabel.TextColor3 = Color3.fromRGB(255,255,255)
+GUI.TitleLabel.BackgroundTransparency = 1
+GUI.TitleLabel.Font = Enum.Font.GothamBold
+GUI.TitleLabel.TextScaled = true
+GUI.TitleLabel.TextWrapped = true
+GUI.TitleLabel.Parent = GUI.LoaderFrame
+
+-- Info label
+GUI.InfoLabel = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('fvUiJMlmWUTrsQSpkNbSMwtxTtSThqppJMOSObHLbJMZYBwyTWdYOTVVGV4dExhYmVs'))
+GUI.InfoLabel.Size = UDim2.new(1,0,0.2,0)
+GUI.InfoLabel.Position = UDim2.new(0,0,0.35,0)
+GUI.InfoLabel.TextColor3 = Color3.fromRGB(200,200,200)
+GUI.InfoLabel.BackgroundTransparency = 1
+GUI.InfoLabel.TextScaled = true
+GUI.InfoLabel.TextWrapped = true
+GUI.InfoLabel.Font = Enum.Font.Gotham
+GUI.InfoLabel.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ueRMZbmcLsXBrviuiMOgHdfIYosMdEYSTIUlzGyHLkbqbhcTXekUjYdSW5pdGlhbGl6aW5nIHN5c3RlbS4uLg==')
+GUI.InfoLabel.Parent = GUI.LoaderFrame
+
+-- Progress Bar
+GUI.BarBG = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('nLTagbgoniSMXoGymLRrBTLdqIWGkKmEQpuspfoJCtOvAHceKgNxrTSRnJhbWU='))
+GUI.BarBG.Size = UDim2.new(0.8,0,0.15,0)
+GUI.BarBG.Position = UDim2.new(0.1,0,0.65,0)
+GUI.BarBG.BackgroundColor3 = Color3.fromRGB(70,70,70)
+GUI.BarBG.Parent = GUI.LoaderFrame
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('sXGWOZiTRyjScJXvMuDvcRNajQNnxuhLmqMDCPDOfvqhlePFlLVTBQcVUlDb3JuZXI='), GUI.BarBG).CornerRadius = UDim.new(0,8)
+
+GUI.Bar = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ZiCpUUCsylxtTYwvyzsbIMpikcaHLhplimrEJqznWwEJSRIHXivPivlRnJhbWU='))
+GUI.Bar.Size = UDim2.new(0,0,1,0)
+GUI.Bar.BackgroundColor3 = Color3.fromRGB(0,200,0)
+GUI.Bar.Parent = GUI.BarBG
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('tHRFTUIZVMWeDeMdFoEGvrkfyXUBPYUoCQXDlgKYxOMFSzQJDJtSRmuVUlDb3JuZXI='), GUI.Bar).CornerRadius = UDim.new(0,8)
+
+-- Animated Ring
+GUI.Ring = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('RBxahqEQvnolDlkwJeQhXbVUDEsZYpimXFOwbJMKdQBBLCmehngCidVRnJhbWU='))
+GUI.Ring.Size = UDim2.new(0,40,0,40)
+GUI.Ring.Position = UDim2.new(0.5,-20,0,5)
+GUI.Ring.BackgroundColor3 = Color3.fromRGB(0,200,0)
+GUI.Ring.Transparency = 0.5
+GUI.Ring.BorderSizePixel = 0
+GUI.Ring.ZIndex = 1
+GUI.Ring.Parent = GUI.ScreenGui
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('yBfSuihIShfcFwyWKBkSrzoSniUVJjVKwAhelOStcwEiVLuOpcDSZNAVUlDb3JuZXI='), GUI.Ring).CornerRadius = UDim.new(1,0)
+
+-- Tooltip GUI
+GUI.TooltipFrame = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('YfjezGsBSQhogCIhegSXrFUCClHwucygfikLFjwRhoscWAnnhInmqliRnJhbWU='))
+GUI.TooltipFrame.Visible = false
+GUI.TooltipFrame.Size = UDim2.new(0, 200, 0, 50)
+GUI.TooltipFrame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+GUI.TooltipFrame.BorderColor3 = Color3.fromRGB(80,80,80)
+GUI.TooltipFrame.BorderSizePixel = 1
+GUI.TooltipFrame.ZIndex = 100
+GUI.TooltipFrame.Parent = GUI.ScreenGui
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('nIYYpQQVPcVHAYHRrDzcMsxjydZepZvezIvIkQZlCREWdeDWssJfAIMVUlDb3JuZXI='), GUI.TooltipFrame).CornerRadius = UDim.new(0,6)
+
+GUI.TooltipLabel = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('mmbBVcHddViRrGMXVjTOzTYJirGqmMMRIQopESnQYpvpDeYELipUSIvVGV4dExhYmVs'))
+GUI.TooltipLabel.Size = UDim2.new(1, -10, 1, -10)
+GUI.TooltipLabel.Position = UDim2.new(0, 5, 0, 5)
+GUI.TooltipLabel.BackgroundTransparency = 1
+GUI.TooltipLabel.TextColor3 = Color3.fromRGB(230,230,230)
+GUI.TooltipLabel.Font = Enum.Font.Gotham
+GUI.TooltipLabel.TextScaled = true
+GUI.TooltipLabel.TextWrapped = true
+GUI.TooltipLabel.TextXAlignment = Enum.TextXAlignment.Left
+GUI.TooltipLabel.TextYAlignment = Enum.TextYAlignment.Top
+GUI.TooltipLabel.Parent = GUI.TooltipFrame
+
+-- ======= NEW: Custom Alert Modal ======= --
+GUI.AlertOverlay = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('iKgwHdAuCfruhemCztcfMlVEauquHVrVZjMYdZQcMbQTRffpMqdlVqVRnJhbWU='))
+GUI.AlertOverlay.Name = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('hBTGcngWokrsdmgNyYKnakWwXFHJkXmtgaMUJJuChvecUgfPpNNRvqfQWxlcnRPdmVybGF5')
+GUI.AlertOverlay.Size = UDim2.new(1,0,1,0)
+GUI.AlertOverlay.BackgroundColor3 = Color3.new(0,0,0)
+GUI.AlertOverlay.BackgroundTransparency = 1
+GUI.AlertOverlay.ZIndex = 200
+GUI.AlertOverlay.Visible = false
+GUI.AlertOverlay.Parent = GUI.ScreenGui
+
+GUI.AlertFrame = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('wbUGplWcdvVdkPVjCCOeYOqiQVlRweYJSJBhLNhLDgEsnWjLvDfIKBPRnJhbWU='))
+GUI.AlertFrame.Name = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('GudYyIhEApntmuHXZuTNWDRzvpCHQfmHVnpFAkKOMRQpTtyeIXfcgSWQWxlcnRGcmFtZQ==')
+GUI.AlertFrame.Size = UDim2.new(0, 400, 0, 220)
+GUI.AlertFrame.Position = UDim2.new(0.5, -200, 0.5, -110)
+GUI.AlertFrame.BackgroundColor3 = Color3.fromRGB(45,45,45)
+GUI.AlertFrame.BorderColor3 = Color3.fromRGB(200,0,0)
+GUI.AlertFrame.BorderSizePixel = 2
+GUI.AlertFrame.Parent = GUI.AlertOverlay
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('cZArvLcPjMoYFvpdOWVykXEaXsZbgZyGeipDdnrwllZWugBmVDVvJdZVUlDb3JuZXI='), GUI.AlertFrame).CornerRadius = UDim.new(0,12)
+
+GUI.AlertTitle = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ArGbpMwsKtaEdWKbENQkmqRgJeBtlpAkGdOwwxanUjTMRMjxZFZZudfVGV4dExhYmVs'))
+GUI.AlertTitle.Size = UDim2.new(1,0,0,40)
+GUI.AlertTitle.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('qsAJTZnRqbqvDgeJbhBQoFyiucAqZRzOySawARgsYJtsMIWddGilaqV8J+aqCBTRUNVUklUWSBBTEVSVCDwn5qo')
+GUI.AlertTitle.Font = Enum.Font.GothamBold
+GUI.AlertTitle.TextColor3 = Color3.fromRGB(255,255,255)
+GUI.AlertTitle.BackgroundColor3 = Color3.fromRGB(200,0,0)
+GUI.AlertTitle.ZIndex = 202
+GUI.AlertTitle.Parent = GUI.AlertFrame
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('GlEwsgmugwHgIxCXCuDHpwMmIemeSiKQiVNFjOaEDAkpQSQxpzhlUxcVUlDb3JuZXI='), GUI.AlertTitle).CornerRadius = UDim.new(0,12)
+local titleCorner = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('uAxlNcgqWjPdFJXRLETuECEJKIQVuRZDRwiCxGLcgvDfRKHQATzBJbBVUlDb3JuZXI='), GUI.AlertTitle)
+titleCorner.CornerRadius = UDim.new(0,12)
+local titleStroke = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('rZUAnmeEzHwcZntQhHLNCpRnSvtrpphwfrADmhoXHapuuEnlzzRxxJdVUlTdHJva2U='), GUI.AlertTitle)
+titleStroke.Thickness = 0
+
+GUI.AlertMessage = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('iFCMZrqgnHEefrdYzTafcxkXtbvRdqekrNMPBByJSGMjlkKeTswodeqVGV4dExhYmVs'))
+GUI.AlertMessage.Size = UDim2.new(1, -40, 0, 100)
+GUI.AlertMessage.Position = UDim2.new(0, 20, 0, 50)
+GUI.AlertMessage.BackgroundTransparency = 1
+GUI.AlertMessage.Font = Enum.Font.Gotham
+GUI.AlertMessage.TextColor3 = Color3.fromRGB(230,230,230)
+GUI.AlertMessage.TextScaled = true
+GUI.AlertMessage.TextWrapped = true
+GUI.AlertMessage.Parent = GUI.AlertFrame
+
+GUI.AlertDismiss = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('yNoviWKXxHOovRAmCjgYFCIWjbNlrbdniXhmZOUDQxgRWUogLorhFqhVGV4dEJ1dHRvbg=='))
+GUI.AlertDismiss.Size = UDim2.new(0.5, 0, 0, 40)
+GUI.AlertDismiss.Position = UDim2.new(0.25, 0, 1, -55)
+GUI.AlertDismiss.BackgroundColor3 = Color3.fromRGB(80,80,80)
+GUI.AlertDismiss.Font = Enum.Font.GothamBold
+GUI.AlertDismiss.TextColor3 = Color3.fromRGB(255,255,255)
+GUI.AlertDismiss.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('exhXSYFJZicELjmeVinDjZyZuzffDfUefvxvEYfdpQDfGlQukKIjwLVRElTTUlTUw==')
+GUI.AlertDismiss.Parent = GUI.AlertFrame
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('XcLrGnaMpOfjDGjFGBWvXNQdbkbOyCzxjRWPzZOQudaeNnizEiPasuXVUlDb3JuZXI='), GUI.AlertDismiss).CornerRadius = UDim.new(0,8)
+
+-- ======= NEW: Analytics & Toggle GUI ======= --
+GUI.InfoPanel = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('RhDxaJpjgKfnhYNFCpFjJUUUkFQznmytfglXAkrbVUNJpDbcNBfAkzLRnJhbWU='))
+GUI.InfoPanel.Name = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('YNpnzWKeVuMqVuddvCAvKHSbneLdDsYVIzOckUVhghZGJrzbilojjwMSW5mb1BhbmVs')
+GUI.InfoPanel.Size = UDim2.new(0, 250, 0, 40)
+GUI.InfoPanel.Position = UDim2.new(1, -260, 1, -210)
+GUI.InfoPanel.BackgroundColor3 = Color3.fromRGB(20,20,20)
+GUI.InfoPanel.BackgroundTransparency = 0.2
+GUI.InfoPanel.ZIndex = 9
+GUI.InfoPanel.ClipsDescendants = true
+GUI.InfoPanel.Parent = GUI.ScreenGui
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('TkVCVqjoQoPdEZxeKIjOBbrwrtxqusuIOdsdsuQMwgWGJYKQPkGlLFaVUlDb3JuZXI='), GUI.InfoPanel).CornerRadius = UDim.new(0,6)
+
+GUI.AnalyticsLabel = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('qsuptUXnCVgntmWopEoGoMoCQkHTQZFuAltVPNpZPiDuFVpbbTMrftsVGV4dExhYmVs'))
+GUI.AnalyticsLabel.Size = UDim2.new(1, -50, 1, 0)
+GUI.AnalyticsLabel.Position = UDim2.new(0, 10, 0, 0)
+GUI.AnalyticsLabel.BackgroundTransparency = 1
+GUI.AnalyticsLabel.Font = Enum.Font.Code
+GUI.AnalyticsLabel.TextSize = 14
+GUI.AnalyticsLabel.TextColor3 = Color3.fromRGB(200,200,200)
+GUI.AnalyticsLabel.TextXAlignment = Enum.TextXAlignment.Left
+GUI.AnalyticsLabel.Parent = GUI.InfoPanel
+
+GUI.LogToggleButton = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('SATqUYKUCXrcrXGOVhEOxwwasWiHDJISlafJxwqRyhdNbrvOdbRwjPVVGV4dEJ1dHRvbg=='))
+GUI.LogToggleButton.Size = UDim2.new(0, 40, 0, 30)
+GUI.LogToggleButton.Position = UDim2.new(1, -45, 0, 5)
+GUI.LogToggleButton.BackgroundColor3 = Color3.fromRGB(80,80,80)
+GUI.LogToggleButton.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('JdUCAOsFXYCnnqzwnWRBAExBlrucmODUaFnvanzAvoRLPJoKQKBJMTMTE9H')
+GUI.LogToggleButton.Font = Enum.Font.GothamBold
+GUI.LogToggleButton.TextColor3 = Color3.fromRGB(255,255,255)
+GUI.LogToggleButton.Parent = GUI.InfoPanel
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('SMAQFAzRoHhRtkcuvpcFhbaKUhGZfgxSdeVanKbeNQsVoeBEOtmbGwWVUlDb3JuZXI='), GUI.LogToggleButton).CornerRadius = UDim.new(0,6)
+
+-- ======= Helper Functions ======= --
+function AntiGift:PlaySound(soundId, volume, pitch)
+	if not AntiGift.Config.EnableSoundEffects then return end
+	local sound = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('oGOLadRLEdxmIMBIvBCYJRWxdCGYNjqiOhFNzjEjXrPOyElbXMtJlxiU291bmQ='))
+	sound.SoundId = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('LGaifUwABYbSVCQOxLehAwQFVhgCwUWuzVavbRLLwaPXwMVoysKOQoScmJ4YXNzZXRpZDovLw==') .. soundId
+	sound.Volume = volume or 0.5
+	sound.Pitch = pitch or 1
+	sound.Parent = SoundService
+	sound:Play()
+	task.delay(sound.TimeLength, function() sound:Destroy() end)
 end
 
-setStatus(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('BGTTVKydNOkFDQPxcGneCtooyPoJMBiEPFAYYTlVoDNcbpIYiTumPZxc2FmZQ=='))
-
-local LoaderFrame = Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('kNVxRfpFaCEUAyiVKgvmzDNgbjbaBHZNkirMBHTPjSMCVZctSPHKsyYRnJhbWU='))
-LoaderFrame.Size = UDim2.new(0.5,0,0.15,0)
-LoaderFrame.Position = UDim2.new(0.25,0,0.425,0)
-LoaderFrame.BackgroundColor3 = Color3.fromRGB(30,30,30)
-LoaderFrame.AnchorPoint = Vector2.new(0,0)
-LoaderFrame.Parent = ScreenGui
-LoaderFrame.ZIndex = 50
-LoaderFrame.ClipsDescendants = true
-LoaderFrame.Active = true
-
-local TitleLabel = Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('iSxYzWLPvJyBcClIMtADKtFwYyvSyyUftTlSeEYzJJyboQyBoxDCMkoVGV4dExhYmVs'))
-TitleLabel.Size = UDim2.new(1,0,0.4,0)
-TitleLabel.Position = UDim2.new(0,0,0,0)
-TitleLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('guvRjBnFigBAeALvCEhsYiquMSNsPUbTOEWrtYdjDTLjergedzQlUGc8J+boe+4jyBBbnRpLUdpZnQgU2Nhbg==')
-TitleLabel.TextColor3 = Color3.fromRGB(255,255,255)
-TitleLabel.BackgroundTransparency = 1
-TitleLabel.Font = Enum.Font.GothamBold
-TitleLabel.TextScaled = true
-TitleLabel.TextWrapped = true
-TitleLabel.Parent = LoaderFrame
-
-local BarBG = Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('tUwDYAdjRshBQyNbxXQcYLWLzHsZAMsyXiagMYZAlsGRXGoaEklkKxHRnJhbWU='))
-BarBG.Size = UDim2.new(0.8,0,0.15,0)
-BarBG.Position = UDim2.new(0.1,0,0.65,0)
-BarBG.BackgroundColor3 = Color3.fromRGB(60,60,60)
-BarBG.Parent = LoaderFrame
-
-local Bar = Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('OPmisEcsUdXJBzWyUXXyqCSeSKDbhzoUOrzihOfMopJflMTJBQPJaytRnJhbWU='))
-Bar.Size = UDim2.new(0,0,1,0)
-Bar.BackgroundColor3 = Color3.fromRGB(0,200,0)
-Bar.Parent = BarBG
-
-local InfoLabel = Instance.new(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('uKKzoRieIVUhIYtTJezcQiukdoLIzYxuokZVFrzCqNOsdJfFVHBUTnmVGV4dExhYmVs'))
-InfoLabel.Size = UDim2.new(1,0,0.2,0)
-InfoLabel.Position = UDim2.new(0,0,0.45,0)
-InfoLabel.TextColor3 = Color3.fromRGB(200,200,200)
-InfoLabel.BackgroundTransparency = 1
-InfoLabel.TextScaled = true
-InfoLabel.TextWrapped = true
-InfoLabel.Font = Enum.Font.Gotham
-InfoLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('oYXkIPSEIIoBjhFnPKvtZraHwuBAPsYtWfNzCqEvGEaIkzDRLLnFQghSW5pdGlhbGl6aW5nIHN5c3RlbS4uLg==')
-InfoLabel.Parent = LoaderFrame
-
-local BlockedRemotes = {}
-
-local AllGiftRemotes = ReplicatedStorage:GetDescendants()
-local GiftList = {}
-for _,r in ipairs(AllGiftRemotes) do
-    if (r:IsA(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('SpneVhxvVwEAOIPZkEgHPCDwgyEkaZvkkxPsyeuFtKyxOYfMuCaoXSaUmVtb3RlRXZlbnQ=')) or r:IsA(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('WKsTVuFUgALoRzLPXCUHyCSYeXmMdCTlIokENSBmNIBjEBFkboGRNshUmVtb3RlRnVuY3Rpb24='))) and r.Name:lower():find(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('KBSQeZVQTSqeWDUyTixUBPlXwqFtRMRnaBaMMcAuEuXBKDNlSLLzQapZ2lmdA==')) then
-        table.insert(GiftList,r)
-    end
+function AntiGift:Log(action, remoteName, statusColor, extraInfo)
+	local entry = {
+		Time = os.time(),
+		Action = action,
+		Remote = remoteName,
+		Color = statusColor or Color3.fromRGB(255,255,255),
+		Info = extraInfo or SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('iPiMRfBygJJsFuPHsuGovpZErCNqOklUwelQjNBXUPhhVFMeZoOIclWTm8gYWRkaXRpb25hbCBkYXRhLg==')
+	}
+	table.insert(AntiGift.Logs, 1, entry) -- Insert at the beginning for newest first
+	if #AntiGift.Logs > 100 then table.remove(AntiGift.Logs) end -- Keep log table from getting too big
+	AntiGift:UpdateLogGUI()
 end
 
-local function blockRemote(remote)
-    if typeof(remote) == MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('fgVyLxjZedsGFumoCwfTinflHUGujZxHKEYfbLFrbCMRtJKGRfwqWxRSW5zdGFuY2U=') and (remote:IsA(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('tBlpJdpiFoxBJtbZKhjUGgzsMEzREJuTcmbrZtQGWdPYcwlBaatgVFDUmVtb3RlRXZlbnQ=')) or remote:IsA(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('EloSVIHtBkJnYtzTuMEZioUdMwussTcaSdBJohUYwRzpfOwtmvjNbuHUmVtb3RlRnVuY3Rpb24='))) then
-        local old; old = hookfunction(remote.FireServer, function(self,...)
-            setStatus(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('dHiZXAuQJzUCSeAOPgXKmiAXFvvnigCWXgQeJbIXWZLGmZXHvEUhdfyYnlwYXNz'))
-            for _, item in pairs(LocalPlayer.Backpack:GetChildren()) do
-                item:SetAttribute(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('hYYOoNxOzJUseTRGroqZdpGLjtTFoqiBIvPrLZLlXfCnlqWJNUqGEzxZA=='), true)
-            end
-            pcall(function() remote:Destroy() end)
-            LocalPlayer:Kick(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('zLYMSpKxPOMnOfutnjaSEPQNnndcIEKAMtUGPXafRxaEVgHSwtwHzfe8J+aqCBBbnRpLVNjYW06IEdpZnQgcmVtb3RlIHRyaWdnZXJlZC4gUGV0cy9pdGVtcyBsb2NrZWQu'))
-            return nil
-        end)
-        BlockedRemotes[remote] = old
-    end
+function AntiGift:ShowTooltip(text)
+	if not AntiGift.Config.EnableHoverTooltips then return end
+	GUI.TooltipLabel.Text = text
+	GUI.TooltipFrame.Visible = true
 end
 
-local total = #GiftList
-for i,remote in ipairs(GiftList) do
-    local progress = i / total
-    Bar:TweenSize(UDim2.new(progress,0,1,0),MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('oDoBbZWpRNrcoLgKdrgsSGGMjtCdShtGfdcYULensqOyWaezrBAOodjT3V0'),MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('KHFsYeXIllRjWlJyrfhypYZnDgkEdoHoCSQNaPCvHXJkDaEZAchGfSrU2luZQ=='),0.4,true)
-    InfoLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('mjXsTBcZnbAqlwtyIbDsyuISHcPUiGrxclsiwczcJGdmnDtPvFwHFefQmxvY2tpbmc6IA==')..remote.Name
-    blockRemote(remote)
-    task.wait(0.5)
+function AntiGift:HideTooltip()
+	if not AntiGift.Config.EnableHoverTooltips then return end
+	GUI.TooltipFrame.Visible = false
 end
 
-for i=1,10 do
-    InfoLabel.Text = MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('uyLXxJWspgieEeQjjhxEGOgOjalclvJzTFNbZhmbxiowRKPQURylwlhRmluYWxpemluZyBwcm90ZWN0aW9ucw==')..string.rep(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('dFRduJpSyApTwTLajqITPTvqLSvmbEiUrTDCGqzNuVNlGwdJvmloVlELg=='),i%4)
-    task.wait(1)
+-- ======= NEW: Custom Alert Function ======= --
+function AntiGift:ShowAlert(message)
+	if not AntiGift.Config.ShowCustomAlertOnTrigger then return end
+	GUI.AlertMessage.Text = message
+	GUI.AlertOverlay.Visible = true
+	TweenService:Create(GUI.AlertOverlay, TweenInfo.new(0.3), {BackgroundTransparency = 0.4}):Play()
+	AntiGift:PlaySound(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('PpkAbuqOKwnyoNEdyEvsQWDlDjjBmyZCMJoNLNmJSQlostKKAvQSHZPNTEwMzE4OTMzNA=='), 0.8, 0.9) -- Alert sound
 end
 
-LoaderFrame:TweenPosition(UDim2.new(0.25,0,-0.2,0),MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('irPBhPnHmgXHuAyoTFejOoFJUOmNbFyNnOwqGjFLpjSRKTurokliZmPT3V0'),MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('rkYzCxFOsPXZnnwzrktEIUYquuhWmnZpPyAsYipPvQLMswRmritbSzLU2luZQ=='),0.8,true)
-task.delay(1,function() LoaderFrame:Destroy() end)
+-- ======= Status Functions ======= --
+function AntiGift:SetStatus(mode)
+	AntiGift.Status = mode
+	local statusInfo = {
+		safe = {Color3.fromRGB(0,200,0), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('CbyDrYacaKbQufzsEPtYYbqxmefLwyGMmdaveXXWWBACcMmJaXekNVlU0FGRQ=='), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('cvPOIVRmPNtExddTtquWvVXRbvjyyLQuwMNMoDNnQbFJrWWXEMkKkvvU3lzdGVtIG9wZXJhdGlvbmFsLiBBbGwga25vd24gZ2lmdCByZW1vdGVzIGFyZSBibG9ja2VkLg==')},
+		warn = {Color3.fromRGB(255,200,0), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('KpMAEVcREmRuwjIMtXeBocJLkVRuqxduxdjvjJklJXisVCfMYETQNpuVlVMTkVSQUJMRQ=='), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('dUOWOcCUfJshgkwPeAJyQGCtTfKQwEWUXFNmCrVngmNlbkjyRzEySggQSBub24tY3JpdGljYWwgaXNzdWUgd2FzIGRldGVjdGVkLiBTeXN0ZW0gbWF5IGJlIGF0IHJpc2su')},
+		danger = {Color3.fromRGB(200,0,0), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('SYNVETVvqUdJPQpGWelnfeNwMvJOQbiSkxDBycWnJTPvqYoerozEuAaRkFJTEVE'), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ETFvBroYIxhfyQCzgjGtcMeGfkBZhHqTwEvAwdioNQwwTUWQrkrnmSuQSBjcml0aWNhbCBlcnJvciBvY2N1cnJlZC4gUHJvdGVjdGlvbnMgYXJlIG9mZmxpbmUu')},
+		bypass = {Color3.fromRGB(255, 0, 0), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('sCUsMyFwzBpkjYkWHxtXxdqsLdYKIcsSMtsMzCatDZJPZTQOyhDrkdGVFJJR0dFUkVE'), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('EJmPhraLgggydFzeynWjrDeJOpJTMtIyajfCqZgKKkbsSLMcLWrNnDuQSBtYWxpY2lvdXMgcmVtb3RlIHdhcyB0cmlnZ2VyZWQgYW5kIGJsb2NrZWQuIFlvdXIgaW52ZW50b3J5IGhhcyBiZWVuIHNlY3VyZWQu')}
+	}
+	local info = statusInfo[mode]
+	if info then
+		local colorTween = TweenInfo.new(0.5)
+		TweenService:Create(GUI.StatusDot, colorTween, {BackgroundColor3 = info[1]}):Play()
+		TweenService:Create(GUI.Ring, colorTween, {BackgroundColor3 = info[1]}):Play()
+		GUI.StatusLabel.Text = info[2]
+		-- Disconnect old events to prevent memory leaks
+		if GUI.StatusDot.MouseEnter then GUI.StatusDot.MouseEnter:DisconnectAll() end
+		if GUI.StatusDot.MouseLeave then GUI.StatusDot.MouseLeave:DisconnectAll() end
+		-- Connect new events
+		GUI.StatusDot.MouseEnter:Connect(function() AntiGift:ShowTooltip(info[3]) end)
+		GUI.StatusDot.MouseLeave:Connect(function() AntiGift:HideTooltip() end)
+	end
+end
 
-setStatus(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('owaBwAMvcuSvvEZpcRXWCLTCvRpPOhkVrdhAGJzLWGLqOUPKevBNXfvc2FmZQ=='))
+-- ======= Inventory Locking ======= --
+function AntiGift:LockItem(item)
+	if item:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('KCmRLCJNsLrdorqEaSdFJSiIgQKOdditotrooASWGjkGpTRGYRTDLMjVG9vbA==')) and AntiGift.Config.AutoLockInventory then
+		item:SetAttribute(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('FZUSLUNxkeoFEDRMwxZzcoMAOYwzmKGFwwLuSPRJaVTezETkWZcVicYQW50aUdpZnRMb2NrZWQ='), true)
+	end
+end
 
-LocalPlayer:GetPropertyChangedSignal(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('qwLcizlVtJebdiBQjQWKFrVIHNtKCsjVGNMxGIhdTAhFlgoCskZtixLUGxheWVyR3Vp')):Connect(function()
-    if not ScreenGui.Parent then
-        setStatus(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('bIhQtRURtAuoqljoPqBPgiacjmwLLsYbWCgmHUpNSaITMDGGMvbdzREYnlwYXNz'))
-        LocalPlayer:Kick(MHgxpIRlZfPrAnBItCwKbuLvyOjQEJFkywYaWLzAPQNYXTbNYwjGWgKHZVXJYfhyjtshrqd('UjOXvtYjpCoJOAdtuvTuXkZekVOdnSrUWyaOpUtSVXDDlmBuOaGxDGx8J+aqCBBbnRpLVNjYW06IEdVSSB0YW1wZXJpbmcgZGV0ZWN0ZWQuIENsaWVudCBzdG9wcGVkLg=='))
+function AntiGift:LockInventory()
+	if not AntiGift.Config.AutoLockInventory then return end
+	for _,item in pairs(LocalPlayer.Backpack:GetChildren()) do
+		AntiGift:LockItem(item)
+	end
+	AntiGift.InventoryLocked = true
+end
+
+-- ======= Remote Blocking ======= --
+local oldNameCall
+oldNameCall = hookmetamethod(game, SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('BjJPwxkgaSrjEkJYqAVhLKZHodOFwNGKnkzPWeZatZzmEfOpCpCFvnVX19uYW1lY2FsbA=='), function(self, ...)
+	local method = getnamecallmethod()
+	if typeof(self) == SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('OrAnPEtOepsBvHrDJuesejaRMtISchtGdALebHTKgoYySmMLKFdDqtaSW5zdGFuY2U=') and (self:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('tKoXJEYUARzugVVgHXzizMxTrVfDxRLxDMBWuHNnMajgkFgpurRVHEtUmVtb3RlRXZlbnQ=')) or self:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('WNAlxZzDvXUeWwDRhoKxxyVQHBoTIpNgmNYGTddQROFlWtoxCRMNXUzUmVtb3RlRnVuY3Rpb24='))) and method == SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ZMxUDXSSaJflZdIxQmuIXOroKkWKHDapbygLnhbBcHAGrQDGoHumDqCRmlyZVNlcnZlcg==') then
+		if self.Name:lower():find(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('HlSbIjWKkpuorFRUzXPEylfTWWayxJIFGeacVPKuLNigCQlZrHTxplnZ2lmdA==')) then
+			if not table.find(AntiGift.Config.WhitelistedRemotes, self.Name) then
+				AntiGift:SetStatus(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('YBGPTHDTjdirFFwgUvvYymgnFYqlWkJXgQCJfUwdPQgDWdGwXNxvsUGYnlwYXNz'))
+				AntiGift:LockInventory()
+				AntiGift.Analytics.TriggersAvoided += 1
+
+				local remotePath = self:GetFullName()
+				AntiGift:Log(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('lMCZOEDkImMDCbXrpiAEZOdCxLXGbwZTfkAoaBxiliRhzJYCrIKQmhpVHJpZ2dlcmVk'), self.Name, Color3.fromRGB(255, 20, 20), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('IMupREMrBxavsetpjEtVeFcBRsyPQmRAXnBEyifQIAiiGlADOxIuslIUGF0aDog')..remotePath)
+
+				if AntiGift.Config.ShowCustomAlertOnTrigger then
+					AntiGift:ShowAlert(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('aSuMzgZwVQasVFkZwrAYRsYbZHgAhbAGxKXidVUoGyKJEOePIWDEbHSQmxvY2tlZCBhIG1hbGljaW91cyByZW1vdGUgZXZlbnQgbmFtZWQg')SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('vTwuCiEqGcHdRjGfdiHkKPUeUVBHeMclkcZqwfDMBOFrKemlWafrmNELi5zZWxmLk5hbWUuLg==')SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('nbxuBojMNoPHzlxMfrgZtZkNPdYnTsbYJCCkWgbupYZuFgUXryqeQAUIGZyb20gZmlyaW5nLiBZb3VyIGl0ZW1zIGFyZSBzYWZlLg=='))
+				end
+				if AntiGift.Config.AutoKickOnTrigger then
+					task.wait(0.1) -- allow alert to show
+					LocalPlayer:Kick(AntiGift.Config.KickMessage)
+				end
+				return nil -- Block the call
+			end
+		end
+	end
+	return oldNameCall(self, ...)
+end)
+
+function AntiGift:BlockGiftRemote(remote)
+	if typeof(remote) ~= SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('bQAjFEfwJbgaWHLveXsKUgSmgHZPekUeESSIvoSOqcfXqcEpUmQGmPpSW5zdGFuY2U=') then return end
+	if not (remote:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('JVRlySPWzpmwwJwKCixDMEUKfzOPdgPIMYBZZYHVxEHJmSneMssiLNdUmVtb3RlRXZlbnQ=')) or remote:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('njZcZixkBgtHOSxvsgAVTIrFkTyjbrbebpSYmMDgfmzMbkwYaeHSxGxUmVtb3RlRnVuY3Rpb24='))) then return end
+
+	local remoteName = remote.Name
+	if not remoteName:lower():find(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('yRVPdyuMXBnzHjMlHfceQlgzPbOrimUsohUuqSyiUKAnLiqhJHIpVTRZ2lmdA==')) or table.find(AntiGift.Config.WhitelistedRemotes, remoteName) then return end
+	
+	if not AntiGift.BlockedRemotes[remote] then
+		AntiGift.BlockedRemotes[remote] = true
+		AntiGift.Analytics.RemotesBlocked += 1
+		AntiGift:Log(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('GcEpVAwuFqIMBilDfhdSsFQMJyqkUDoVFOoIMRYLyUlSMAdEAzpzSHUQmxvY2tlZA=='), remoteName, Color3.fromRGB(0, 255, 127), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ZrxHcRFYeFsaggItaxVCoJADNmSHGsbVREKeoFjOsSbcMenYdmVLufpUGF0aDog')..remote:GetFullName())
+	end
+end
+
+function AntiGift:ScanAndBlockRemotes()
+	local allRemotes = ReplicatedStorage:GetDescendants()
+	local giftRemotes = {}
+	for _,r in ipairs(allRemotes) do
+		if (r:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('kFLpghsJUdfQuvSVIBpNGtbJCUhTlfirdcFXdBREcBteIgzuCwcsAyRUmVtb3RlRXZlbnQ=')) or r:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('HQsbOxQLVXsfAxVscMtHlVIBeLBGiejSNxvHQBstxlvulwnbOGwcjRvUmVtb3RlRnVuY3Rpb24='))) and r.Name:lower():find(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('SNxgVkaKmzqokXojkCOhMSAWtHBrOQLUGKLZiLYLVjbCCskOCALWpXhZ2lmdA==')) then
+			if not table.find(AntiGift.Config.WhitelistedRemotes, r.Name) then
+				table.insert(giftRemotes,r)
+			end
+		end
+	end
+
+	local total = #giftRemotes
+	if total == 0 then
+		GUI.InfoLabel.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('cEYVumtLppoyPXDKOUEeMcRZPYMMLVxOgXFGJPkodRUrkHXmRhKFBdYTm8gdnVsbmVyYWJsZSByZW1vdGVzIGZvdW5kLg==')
+		task.wait(2)
+		return
+	end
+	
+	for i,remote in ipairs(giftRemotes) do
+		local progress = i/total
+		TweenService:Create(GUI.Bar, TweenInfo.new(0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Size = UDim2.new(progress,0,1,0)}):Play()
+		GUI.InfoLabel.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('wugYkVDbjuFFUbUFjMaLWejIPjMBgfDXNtElVeMVffAvIPtXxILJuzPQmxvY2tpbmc6IA==')..remote.Name
+		AntiGift:BlockGiftRemote(remote)
+		task.wait(0.1)
+	end
+end
+
+-- ======= Loading Animation ======= --
+function AntiGift:ShowLoadingScreen()
+	AntiGift:ScanAndBlockRemotes()
+	GUI.InfoLabel.Text = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('NtfyBAsmpyuIiKACaiKcmrVautukelodcPNfNepWPCRNCYkiMPKVotJRmluYWxpemluZyBwcm90ZWN0aW9ucy4uLg==')
+	TweenService:Create(GUI.Bar, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Size = UDim2.new(1,0,1,0)}):Play()
+	task.wait(1)
+	
+	local tweenInfo = TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+	TweenService:Create(GUI.LoaderFrame, tweenInfo, {Position = UDim2.new(0.25, 0, -0.5, 0)}):Play()
+	
+	task.delay(1, function()
+		if GUI.LoaderFrame and GUI.LoaderFrame.Parent then
+			GUI.LoaderFrame:Destroy()
+		end
+	end)
+end
+
+-- ======= GUI Tamper Detection ======= --
+GUI.ScreenGui.DescendantRemoving:Connect(function(descendant)
+	if descendant.Name == SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('SrwFHhcSmHTzfeIAnNvxpBrYYjSQkiZrnMaWlrJMdiIraZFwkPudKJDU3RhdHVzRG90') or descendant.Name == SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('rQlNHTfKixOSTHSzopFfwsKVaTyHZUIFKYvviCRByXjpnLtAHfsnlSfTG9nRnJhbWU=') or descendant.Name == SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('QTmgaWrAemqBAWwSiEBJeNbqgzbZRyuffoiwQYRmFLnwoNXXFebEaCFQWxlcnRPdmVybGF5') then
+		AntiGift:SetStatus(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('rQorNUtDOlCMVyCgvlDgeqerDllFQqcWYavBCxfrjMbqVXEcoTOCWvOZGFuZ2Vy'))
+		AntiGift:Log(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('XChvHKfNxgGlWMFwEDVmcikVGVbGdkeafRTdXeItIIthahNqsTTSXPtVGFtcGVyaW5n'), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('TaPvTjULxBMiQOqpStabKMzZOtnMmYgCqnLiElgJoJqRHsJjPZqTAuBR1VJIGNvbXBvbmVudCByZW1vdmVk'), Color3.fromRGB(200,0,0))
+		if AntiGift.Config.AutoKickOnTrigger then
+			LocalPlayer:Kick(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ujgohZCDrMhDgDUqpJWlDNyAEIoUcPIGmXGiYjMOVImOCLLdJaEKMdB8J+aqCBBbnRpLVNjYW06IEdVSSB0YW1wZXJpbmcgZGV0ZWN0ZWQuIENsaWVudCBzdG9wcGVkLg=='))
+		end
+	end
+end)
+GUI.ScreenGui:GetPropertyChangedSignal(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('XpETNVlyRegRJICbptAowuVxXYXFejXrJNexPDNhSsZzlvYfnsckViuRW5hYmxlZA==')):Connect(function()
+    if not GUI.ScreenGui.Enabled then
+        AntiGift:SetStatus(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('GnjxSwjnawKdHKkjGZVdfbynHHIPodFrjSZFMjrjagWayFplQJfAZazZGFuZ2Vy'))
+		if AntiGift.Config.AutoKickOnTrigger then
+        	LocalPlayer:Kick(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('hoQbPClzjPkwloSdxrRgekHyDjFlTfOTUXcalpKPZvkbeAoYYHgGGfA8J+aqCBBbnRpLVNjYW06IEdVSSB0YW1wZXJpbmcgZGV0ZWN0ZWQuIENsaWVudCBzdG9wcGVkLg=='))
+		end
     end
 end)
+
+
+-- ======= Dynamic Remote Monitoring ======= --
+ReplicatedStorage.DescendantAdded:Connect(function(r)
+	task.wait() 
+	if (r:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('UtjRxoRptAkTRDYhJbIIFUNtvYLjMYcvoIVOZkKBKtaVFKuzeshmLnMUmVtb3RlRXZlbnQ=')) or r:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('djMfcYQpuYUtFbFGwbxgHTFmeoPMFnmnITpxAGXLGIdOHXqMBzlgShiUmVtb3RlRnVuY3Rpb24='))) and r.Name:lower():find(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('zuuCRGThqIxauCXHyBspVNKTFVHcGytYtWzQdSMCHQSWUZyonlannDeZ2lmdA==')) then
+		AntiGift:Log(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('CptIjUNybcWnjLbliSWVEUFwpMXPvFohHvEQdMJDPZTANpproWiExcYRGV0ZWN0ZWQ='), r.Name, Color3.fromRGB(255, 255, 0), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('eGtIijyxvKShPhIlAysYSnpFiWVpIitMaxjMwgXxUBNblVksBpsHVgsRHluYW1pY2FsbHkgZm91bmQgbmV3IHJlbW90ZS4='))
+		AntiGift:BlockGiftRemote(r)
+		AntiGift:PlaySound(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('WuyCtblBFaFSUpnjTXLHFqzhKtdKwJnwthMavLfXsjVieMVJMgHaTbvMjYzMjM0MjIy'), 0.6, 1.2) -- Notification sound
+	end
+end)
+
+-- ======= Continuous Inventory Locking ======= --
+if AntiGift.Config.AutoLockInventory then
+	LocalPlayer.Backpack.ChildAdded:Connect(function(child)
+		AntiGift:LockItem(child)
+	end)
+end
+
+-- ======= Initialize ======= --
+AntiGift:SetStatus(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('JqZcYDylwHEczOBVjoNIwmcYQMhmUHumMwHgEzILBjlsEXCdVsuZuAhc2FmZQ=='))
+AntiGift:ShowLoadingScreen()
+AntiGift:LockInventory()
+
+-- ======= Animated Ring Effect ======= --
+spawn(function()
+	local angle = 0
+	while GUI.Ring and GUI.Ring.Parent do
+		angle = angle + 4
+		GUI.Ring.Rotation = angle % 360
+		task.wait(0.03)
+	end
+end)
+
+-- ======= Logging Console GUI (Expandable) ======= --
+GUI.LogFrame = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('BRyjSivXRuaPriALNYuctldwVPKqjPLffDfgpmcEZwymoVkhBTdLYKPU2Nyb2xsaW5nRnJhbWU='))
+GUI.LogFrame.Size = UDim2.new(0, 250, 0, 150)
+GUI.LogFrame.Position = UDim2.new(1, -260, 1, -160)
+GUI.LogFrame.BackgroundColor3 = Color3.fromRGB(20,20,20)
+GUI.LogFrame.BackgroundTransparency = 0.2
+GUI.LogFrame.BorderSizePixel = 0
+GUI.LogFrame.CanvasSize = UDim2.new(0,0,0,0)
+GUI.LogFrame.ScrollBarImageColor3 = Color3.fromRGB(150,150,150)
+GUI.LogFrame.ScrollBarThickness = 6
+GUI.LogFrame.ZIndex = 10
+GUI.LogFrame.Visible = true -- Start visible
+GUI.LogFrame.Parent = GUI.ScreenGui
+Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('AcWFHhsEbCSkVvEFUIcOCOmTSajjWqfTDNgIDBaTWFHhWRuGMzBgRzwVUlDb3JuZXI='), GUI.LogFrame).CornerRadius = UDim.new(0,6)
+local listLayout = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('pYBwDQszyEHncDdpKHFkTmdfZyHTXbbdRyZolORFdvFRacQVMNmIZOUVUlMaXN0TGF5b3V0'), GUI.LogFrame)
+listLayout.Padding = UDim.new(0, 2)
+listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+-- Function to update logs
+function AntiGift:UpdateLogGUI()
+	for _,v in pairs(GUI.LogFrame:GetChildren()) do
+		if v:IsA(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('RXbgWAQTIHbDRdaJIpZzgqRrZNobKZkpIfKyyIAtOuydSjnSNBbrqOYVGV4dExhYmVs')) then
+			v:Destroy()
+		end
+	end
+	
+	local canvasHeight = 0
+	for i,entry in ipairs(AntiGift.Logs) do
+		local label = Instance.new(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('rbnHDXWPXXxMtgwVkSrvSDcIvSxDfUXxafwQsNdzOVIcSsPXdHNsgxyVGV4dExhYmVs'))
+		label.Name = SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('CaJvuizKFkxIAGTdOvCcPueVPKfUCkGvaZaPpeQWGAUFLVbMpXiEXCBTG9nRW50cnk=')
+		label.Size = UDim2.new(1, -10, 0, 18)
+		label.BackgroundTransparency = 1
+		label.TextColor3 = entry.Color
+		label.Font = Enum.Font.Gotham
+		label.TextSize = 14
+		label.Text = string.format(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('cCQraRxoqILxQlOTVWsxMCAejejXfeTaQjgtFzXKAHFhVtNXPupDHxyWyVzXSAlczogJXM='), os.date(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('ULaRDnYZDTDMfyjhwsZZGUMyKSgiXYglDzcDVyZCWiHeMfvrCVKXiCqJVQ='), entry.Time), entry.Action, entry.Remote)
+		label.TextXAlignment = Enum.TextXAlignment.Left
+		label.LayoutOrder = i
+		label.Parent = GUI.LogFrame
+		
+		canvasHeight = canvasHeight + label.AbsoluteSize.Y + listLayout.Padding.Offset
+
+		if AntiGift.Config.EnableHoverTooltips then
+			label.MouseEnter:Connect(function() AntiGift:ShowTooltip(entry.Info) end)
+			label.MouseLeave:Connect(function() AntiGift:HideTooltip() end)
+		end
+	end
+	GUI.LogFrame.CanvasSize = UDim2.new(0, 0, 0, canvasHeight)
+end
+
+-- Tooltip Follow Mouse Logic
+RunService.RenderStepped:Connect(function()
+	if GUI.TooltipFrame.Visible then
+		local mousePos = UserInputService:GetMouseLocation()
+		GUI.TooltipFrame.Position = UDim2.new(0, mousePos.X + 15, 0, mousePos.Y + 15)
+	end
+end)
+
+-- ======= NEW: Event Connections for New GUI ======= --
+GUI.AlertDismiss.MouseButton1Click:Connect(function()
+	AntiGift:PlaySound(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('frBtSgTTvtBWAkBKkWlDBDftlpsAHMYxiZakzsLVOMEIsOmWCTHLeRjMTA3NDgyMzUyNQ=='), 0.7) -- UI close sound
+	TweenService:Create(GUI.AlertOverlay, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+	task.wait(0.3)
+	GUI.AlertOverlay.Visible = false
+end)
+
+GUI.LogToggleButton.MouseButton1Click:Connect(function()
+	AntiGift:PlaySound(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('FbvjauMoJruqIeitwbOglInYZEaNrkAFBnSTfdHuPLlCIKWcGXVAeKnMTA3NDgyMzUyNQ=='), 0.5, 1.2) -- UI click sound
+	GUI.LogFrame.Visible = not GUI.LogFrame.Visible
+	local newText = GUI.LogFrame.Visible and SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('gtuncvZYxtQOqBSjmGNoRgkmfWqHuCJnGfvgnsiXHMZoZWQRqnGlXZfTE9H') or SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('HiVpYwjhWRKLfVMXLTLANIFRKDkVOOwBwRrfNMqRNHScUYTKSakrdIqU0hPVw==')
+	GUI.LogToggleButton.Text = newText
+end)
+
+-- ======= NEW: Analytics Update Loop ======= --
+spawn(function()
+	while GUI.AnalyticsLabel and GUI.AnalyticsLabel.Parent do
+		local uptime = math.floor(tick() - AntiGift.Analytics.SessionStartTime)
+		GUI.AnalyticsLabel.Text = string.format(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('mdGWzkIGDGOsaBMGHWIuGgHSGKXAYWUYbiZsLgLheYeQaDQctMwuPUgQmxvY2tlZDogJWQgfCBUcmlnZ2VyZWQ6ICVkIHwgVXB0aW1lOiAlZHM='),
+			AntiGift.Analytics.RemotesBlocked,
+			AntiGift.Analytics.TriggersAvoided,
+			uptime
+		)
+		task.wait(1)
+	end
+end)
+
+
+-- Final setup call for the log GUI
+AntiGift:UpdateLogGUI()
+
+-- Welcome Log
+AntiGift:Log(SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('YHreswLXPuITPJqkShUzBUqWQdNCKwyaIuhSHeSbhDaKbyWotitHLJVSW5pdGlhbGl6ZWQ='), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('EkUyLeLnfHxSfarcaXBFQwjbAAXPdHochiwiCLjfgEmijvcltYBDTahU3lzdGVtIFJlYWR5'), Color3.fromRGB(200, 200, 200), SLlrVimgQfjCkhABozWcDvbZOSdppBPgvGjbBBtwjBcLYykGfdSktviIPnIiyhmsfSJcMW('HowqCImAMDOpTBhnqFCokrUSDBWZrmTuKsvSivyFDYMCVLIyprNEhlETmV4dC1HZW4gQW50aS1HaWZ0IGlzIG5vdyBhY3RpdmUu'))
     
